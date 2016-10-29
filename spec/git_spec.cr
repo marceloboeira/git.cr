@@ -19,16 +19,26 @@ describe Git do
     end
 
     describe "when the path is given" do
-      it "initializes in the given folder" do
-        repository_path = "/tmp/foo/bar/#{SecureRandom.hex}"
-        Dir.mkdir_p(repository_path)
-        Dir.cd("/tmp")
+      describe "and it is valid" do
+        it "initializes in the given folder" do
+          repository_path = "/tmp/foo/bar/#{SecureRandom.hex}"
+          Dir.mkdir_p(repository_path)
+          Dir.cd("/tmp")
 
-        Git.init(repository_path)
+          Git.init(repository_path)
 
-        Dir.exists?("#{repository_path}/.git").should eq(true)
+          Dir.exists?("#{repository_path}/.git").should eq(true)
 
-        FileUtils.rm_r(repository_path)
+          FileUtils.rm_r(repository_path)
+        end
+      end
+
+      describe "and it is invalid" do
+        it "raises an expection" do
+          expect_raises(Git::InvalidPathException) do
+            Git.init("/foo/bar/b")
+          end
+        end
       end
     end
   end
