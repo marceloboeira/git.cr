@@ -3,6 +3,18 @@ require "file_utils"
 require "secure_random"
 
 describe Git do
+  describe "when the git binary is not valid" do
+    it "raises an error" do
+      Git.binary = "invalid/path/git"
+
+      expect_raises(Git::InvalidBinaryException) do
+        Git.init
+      end
+
+      Git.binary = `which git`.strip
+    end
+  end
+
   describe "init" do
     describe "when no path is given" do
       it "initializes in the current folder" do
