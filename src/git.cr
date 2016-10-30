@@ -15,8 +15,8 @@ module Git
   end
 
   def self.exec(command)
-    raise InvalidBinaryException.new("#{@@binary} is an invalid file") unless system("#{@@binary} --version &> 0")
+    raise InvalidBinaryException.new("#{@@binary} is an invalid file") unless system("#{@@binary} --version &> /dev/null")
 
-    system("#{@@binary} #{command.strip} &> 0")
+    system("#{@@binary} #{command.strip} &> /dev/null")
   end
 end
