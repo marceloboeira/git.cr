@@ -6,7 +6,7 @@ describe Git do
       Git.binary = "invalid/path/git"
 
       expect_raises(Git::InvalidBinaryException) do
-        Git.exec("--version")
+        Git.exec(" --version")
       end
 
       Git.binary = `which git`.strip

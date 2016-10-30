@@ -3,7 +3,6 @@ require "./git/*"
 module Git
   @@binary : String = `which git`.strip
 
-  class InvalidPathException < Exception; end
   class InvalidBinaryException < Exception; end
 
   def self.binary=(path)
