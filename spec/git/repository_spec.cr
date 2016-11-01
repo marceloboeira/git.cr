@@ -61,17 +61,9 @@ describe Git::Repository do
 
     describe "and the given URI is invalid" do
       it "raises an exception" do
+        uri = "http://invalid.com/foo/bar.git"
         expect_raises(Git::Repository::InvalidURIException) do
-          uri = "http://invalid.com/foo/bar.git"
-          repository_dir = "/tmp/foo/bar/#{SecureRandom.hex}"
-          Dir.mkdir_p(repository_dir)
-          Dir.cd(repository_dir)
-
           respository = Git::Repository.clone(uri)
-
-          Dir.exists?("#{repository_dir}/git.cr/.git").should eq(true)
-
-          FileUtils.rm_r(repository_dir)
         end
       end
     end
