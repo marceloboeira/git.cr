@@ -5,3 +5,7 @@ authors:
   - Marcelo Boeira <me@marceloboeira.com>
 
 license: MIT
+
+dev_dependencies:
+  tmpdir:
+    github: marceloboeira/tmpdir.cr
